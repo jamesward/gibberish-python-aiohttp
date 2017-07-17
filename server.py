@@ -1,3 +1,4 @@
+import os
 from aiohttp import web
 import aiohttp
 import asyncio
@@ -17,5 +18,7 @@ async def handle(request):
 app = web.Application()
 app.router.add_get('/', handle)
 
-web.run_app(app)
+port = port = int(os.environ.get("PORT", 8080))
+
+web.run_app(app, port=port)
 
