@@ -11,7 +11,7 @@ async def handle(request):
     async with aiohttp.ClientSession() as session:
         async with session.get("http://randnum.herokuapp.com") as response:
                 num = int(await response.text())
-                words = [await word() for i in range(num)]
+                words = await asyncio.gather(*[word() for i in range(num)])
                 return web.Response(text=" ".join(words))
 
 app = web.Application()
